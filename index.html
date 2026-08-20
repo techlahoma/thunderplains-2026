@@ -275,124 +275,29 @@
   .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.95; margin-bottom: 1rem; color: var(--white); }
   .section-desc { color: var(--gray); font-size: 1.15rem; line-height: 1.7; max-width: 650px; font-weight: 300; }
 
-  /* ============ SPEAKERS ============ */
+  /* ============ SPEAKERS (Sessionize SpeakerWall) ============ */
   .speakers-section {
     background: var(--surface);
     background-image: radial-gradient(ellipse 100% 60% at 80% 20%, rgba(94,18,121,0.08) 0%, transparent 50%);
   }
 
-  .speakers-cfp {
-    margin-top: 1.5rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 2rem;
-    background: var(--magenta);
-    color: var(--white);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    transition: all 0.3s;
-  }
-  .speakers-cfp:hover, .speakers-cfp:focus { transform: translateY(-2px); box-shadow: var(--magenta-glow); }
-
-  #speakers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1px;
+  #sessionize-speakers {
     margin-top: 3rem;
-    background: rgba(255,255,255,0.04);
   }
 
-  .speaker-card {
-    background: var(--surface);
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s;
-    cursor: pointer;
+  /* Sessionize spinner (also injected by their embed script) */
+  .sz-spinner {
+    width: 40px;
+    height: 40px;
+    margin: 100px auto;
+    background-color: var(--brand-purple);
+    border-radius: 100%;
+    animation: sz-scaleout 1s infinite ease-in-out;
   }
-
-  .speaker-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--brand-purple), var(--cyan)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
-  .speaker-card:hover::before, .speaker-card:focus-within::before { transform: scaleX(1); }
-  .speaker-card:hover, .speaker-card:focus-within { background: var(--surface-raised); }
-
-  .speaker-avatar {
-    width: 80px; height: 80px; border-radius: 50%;
-    margin-bottom: 1.5rem;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
-    color: var(--white); background-size: cover; background-position: center;
-    overflow: hidden;
+  @keyframes sz-scaleout {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); opacity: 0; }
   }
-
-  .speaker-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-
-  .speaker-name { font-weight: 700; font-size: 1.2rem; margin-bottom: 0.3rem; color: var(--white); }
-  .speaker-role { font-size: 1rem; color: var(--gray); line-height: 1.5; }
-  .speaker-topic { margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--cyan); letter-spacing: 0.03em; }
-
-  .speaker-card.cfp-card {
-    border: 2px dashed rgba(255,77,144,0.3);
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 260px;
-  }
-
-  .speaker-card.cfp-card:hover { border-color: var(--magenta); background: rgba(255,77,144,0.04); }
-  .cfp-card .cfp-face { font-size: 3rem; margin-bottom: 1rem; opacity: 0.6; }
-  .cfp-card .cfp-text { font-size: 1.1rem; color: var(--magenta); font-weight: 700; }
-  .cfp-card .cfp-sub { font-size: 1rem; color: var(--gray); margin-top: 0.5rem; }
-
-  /* ============ SPEAKER MODAL ============ */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-  }
-
-  .modal-overlay.active { display: flex; }
-
-  .modal-content {
-    background: var(--surface);
-    border: 1px solid rgba(255,255,255,0.08);
-    max-width: 600px;
-    width: 100%;
-    padding: 3rem;
-    position: relative;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 1rem; right: 1.5rem;
-    background: none; border: none;
-    color: var(--gray); font-size: 1.5rem;
-    cursor: pointer; transition: color 0.3s;
-    line-height: 1;
-  }
-
-  .modal-close:hover, .modal-close:focus { color: var(--cyan); }
-
-  .modal-avatar { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 1.5rem; overflow: hidden; }
-  .modal-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .modal-name { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; line-height: 1; margin-bottom: 0.5rem; }
-  .modal-role { font-size: 1rem; color: var(--magenta); margin-bottom: 1.5rem; font-weight: 600; }
-  .modal-bio { font-size: 1.05rem; color: var(--gray); line-height: 1.8; }
-  .modal-talk { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
-  .modal-talk-label { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
-  .modal-talk-title { font-size: 1.2rem; font-weight: 700; }
 
   /* ============ BOLT DIVIDER ============ */
   .bolt-divider { display: flex; align-items: center; justify-content: center; padding: 3rem 0; }
@@ -410,55 +315,11 @@
   .detail-card p { color: var(--gray); font-size: 1.05rem; line-height: 1.6; font-weight: 300; }
   .detail-card p strong { color: var(--white); font-weight: 600; }
 
-  /* ============ SCHEDULE ============ */
+  /* ============ SCHEDULE (Sessionize GridSmart) ============ */
   .schedule-section {
     background: var(--charcoal);
     background-image: radial-gradient(ellipse 70% 40% at 70% 50%, rgba(94,18,121,0.05) 0%, transparent 50%);
   }
-
-  .schedule-table-wrapper { margin-top: 3rem; overflow-x: auto; }
-
-  .schedule-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1rem;
-  }
-
-  .schedule-table th {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.05em;
-    padding: 1.25rem 1.5rem;
-    text-align: left;
-    border-bottom: 2px solid rgba(255,255,255,0.08);
-    color: var(--cyan);
-  }
-
-  .schedule-table th.time-col { width: 120px; color: var(--magenta); }
-
-  .schedule-table td {
-    padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    vertical-align: top;
-    color: var(--gray);
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-
-  .schedule-table tr:hover td { background: var(--surface); }
-
-  .schedule-table .sched-time {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1rem;
-    color: var(--white);
-    white-space: nowrap;
-  }
-
-  .schedule-table .sched-talk { font-weight: 700; color: var(--white); }
-  .schedule-table .sched-speaker { color: var(--gray); font-size: 1rem; margin-top: 0.25rem; }
-  .schedule-table .sched-break { text-align: center; font-weight: 600; color: var(--magenta); }
-
-  .schedule-table td[colspan] { text-align: center; }
 
   #sessionize-schedule { margin-top: 3rem; }
 
@@ -546,7 +407,6 @@
     section { padding: 4rem 1.5rem; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
     .details-grid { grid-template-columns: 1fr; }
-    .schedule-table { font-size: 0.95rem; }
     footer { padding: 3rem 1.5rem 2rem; }
     .footer-legal { flex-direction: column; gap: 0.75rem; }
   }
@@ -626,57 +486,18 @@
   <span class="section-label">Line-Up</span>
   <h2 class="section-title">Speakers</h2>
   <p class="section-desc">Real practitioners sharing real work. No sponsored keynotes, no product pitches — just people who build things.</p>
-  <a href="https://sessionize.com/thunderplains-2026/" class="speakers-cfp" target="_blank" rel="noopener">Submit a Talk — CFP Open</a>
 
-  <div id="speakers-grid">
-    <!-- Sessionize speakers inject here. Fallback CFP cards below. -->
-    <div class="speaker-card cfp-card" tabindex="0" role="link" aria-label="Submit a talk">
-      <div class="cfp-face" aria-hidden="true">👤</div>
-      <div class="cfp-text">See Your Face Here</div>
-      <div class="cfp-sub">Submit a talk proposal</div>
-    </div>
-    <div class="speaker-card cfp-card" tabindex="0" role="link" aria-label="Submit a talk">
-      <div class="cfp-face" aria-hidden="true">🎤</div>
-      <div class="cfp-text">Your Talk, Your Stage</div>
-      <div class="cfp-sub">We want to hear from you</div>
-    </div>
-    <div class="speaker-card cfp-card" tabindex="0" role="link" aria-label="Submit a talk">
-      <div class="cfp-face" aria-hidden="true">⚡</div>
-      <div class="cfp-text">Got Something to Share?</div>
-      <div class="cfp-sub">CFP is open now</div>
-    </div>
-    <div class="speaker-card cfp-card" tabindex="0" role="link" aria-label="Submit a talk">
-      <div class="cfp-face" aria-hidden="true">🧠</div>
-      <div class="cfp-text">Big Idea? Small Tip?</div>
-      <div class="cfp-sub">All formats welcome</div>
-    </div>
-    <div class="speaker-card cfp-card" tabindex="0" role="link" aria-label="Submit a talk">
-      <div class="cfp-face" aria-hidden="true">🌩️</div>
-      <div class="cfp-text">Lightning Talk Ready?</div>
-      <div class="cfp-sub">5 minutes of thunder</div>
-    </div>
-    <div class="speaker-card cfp-card" tabindex="0" role="link" aria-label="Submit a talk">
-      <div class="cfp-face" aria-hidden="true">🚀</div>
-      <div class="cfp-text">First Time Speaker?</div>
-      <div class="cfp-sub">We'll help you shine</div>
+  <!--
+    Sessionize only loads one embed script per page (their loader returns early).
+    SpeakerWall is loaded via data-sessionize-load-url; GridSmart's script provides
+    the shared runtime. Our multi-loader override below fetches both.
+  -->
+  <div id="sessionize-speakers">
+    <div class="sessionize-loader" data-sessionize-load-url="https://sessionize.com/api/v2/xtaduary/view/SpeakerWall?under=True">
+      <div class="sz-spinner" aria-hidden="true"></div>
     </div>
   </div>
 </section>
-
-<!-- SPEAKER MODAL -->
-<div class="modal-overlay" id="speaker-modal" role="dialog" aria-modal="true" aria-labelledby="modal-speaker-name">
-  <div class="modal-content">
-    <button class="modal-close" aria-label="Close">&times;</button>
-    <div class="modal-avatar" id="modal-avatar"></div>
-    <h3 class="modal-name" id="modal-speaker-name"></h3>
-    <div class="modal-role" id="modal-role"></div>
-    <div class="modal-bio" id="modal-bio"></div>
-    <div class="modal-talk" id="modal-talk">
-      <div class="modal-talk-label">Talk</div>
-      <div class="modal-talk-title" id="modal-talk-title"></div>
-    </div>
-  </div>
-</div>
 
 <!-- BOLT DIVIDER -->
 <div class="bolt-divider" aria-hidden="true">
@@ -705,56 +526,9 @@
   <h2 class="section-title">Event Schedule</h2>
   <p class="section-desc">A full day of talks across two tracks. Schedule subject to change.</p>
 
-  <!-- Sessionize auto-populated schedule goes in #sessionize-schedule -->
-  <div id="sessionize-schedule"></div>
-
-  <!-- Fallback static schedule (visible until Sessionize data loads) -->
-  <div class="schedule-table-wrapper" id="static-schedule">
-    <table class="schedule-table" role="table">
-      <thead>
-        <tr>
-          <th class="time-col">Time</th>
-          <th>Room A</th>
-          <th>Room B</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td class="sched-time">8:00 AM</td><td colspan="2" class="sched-break">Registration &amp; Coffee</td></tr>
-        <tr><td class="sched-time">9:00 AM</td><td colspan="2" class="sched-break">Welcome &amp; Opening Remarks</td></tr>
-        <tr>
-          <td class="sched-time">9:30 AM</td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-        </tr>
-        <tr>
-          <td class="sched-time">10:30 AM</td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-        </tr>
-        <tr>
-          <td class="sched-time">11:30 AM</td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-        </tr>
-        <tr><td class="sched-time">12:30 PM</td><td colspan="2" class="sched-break">Lunch Break</td></tr>
-        <tr>
-          <td class="sched-time">1:30 PM</td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-        </tr>
-        <tr>
-          <td class="sched-time">2:30 PM</td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-          <td><div class="sched-talk">⚡ Lightning Talks</div><div class="sched-speaker">Various speakers</div></td>
-        </tr>
-        <tr>
-          <td class="sched-time">3:30 PM</td>
-          <td><div class="sched-talk">Speaker TBA</div><div class="sched-speaker">Topic pending</div></td>
-          <td><div class="sched-talk">⚡ Lightning Talks</div><div class="sched-speaker">Various speakers</div></td>
-        </tr>
-        <tr><td class="sched-time">4:30 PM</td><td colspan="2" class="sched-break">Closing Remarks</td></tr>
-      </tbody>
-    </table>
+  <div id="sessionize-schedule">
+    <!-- One Sessionize <script> provides shared JS (modals, tabs, timezone). document.write injects the GridSmart loader here. -->
+    <script type="text/javascript" src="https://sessionize.com/api/v2/xtaduary/view/GridSmart"></script>
   </div>
 
   <div style="text-align:center;margin-top:2rem;">
@@ -847,183 +621,58 @@
   })();
 
   // ============================================================
-  // SESSIONIZE INTEGRATION
-  // Replace YOUR_EVENT_ID with the actual Sessionize event ID
-  // API docs: https://sessionize.com/playbook/api
-  // Endpoints:
-  //   Speakers: https://sessionize.com/api/v2/{ID}/view/Speakers
-  //   Schedule: https://sessionize.com/api/v2/{ID}/view/GridSmart
+  // SESSIONIZE MULTI-EMBED LOADER
+  // Sessionize's built-in loader only processes the first
+  // [data-sessionize-load-url] element (early return in a loop).
+  // We keep one official embed <script> for shared runtime
+  // (showModal, tabs, timezone), place additional views as
+  // data-sessionize-load-url placeholders, then replace their
+  // loader so every embed on the page loads.
   // ============================================================
+  (function () {
+    if (typeof sessionize === 'undefined') return;
 
-  const SESSIONIZE_EVENT_ID = null; // e.g. 'abc123xy'
+    sessionize.loader = function () {
+      var els = Array.prototype.slice.call(
+        document.querySelectorAll('[data-sessionize-load-url]')
+      );
+      var remaining = els.length;
 
-  // ---- SPEAKERS ----
-  async function loadSessionizeSpeakers() {
-    if (!SESSIONIZE_EVENT_ID) return;
-    try {
-      const res = await fetch(`https://sessionize.com/api/v2/${SESSIONIZE_EVENT_ID}/view/Speakers`);
-      const data = await res.json();
-      if (!data || !data.length) return;
+      function done() {
+        if (typeof sessionize.onLoad === 'function') sessionize.onLoad();
+      }
 
-      const grid = document.getElementById('speakers-grid');
-      // Clear CFP placeholders
-      grid.innerHTML = '';
+      if (!remaining) {
+        done();
+        return;
+      }
 
-      // Flatten speakers from groups
-      const allSpeakers = data.flatMap(group => group.speakers || []);
-
-      allSpeakers.forEach(speaker => {
-        const card = document.createElement('div');
-        card.className = 'speaker-card';
-        card.tabIndex = 0;
-        card.setAttribute('role', 'button');
-        card.setAttribute('aria-label', `View details for ${speaker.fullName}`);
-
-        // Store data for modal
-        card.dataset.name = speaker.fullName || '';
-        card.dataset.role = speaker.tagLine || '';
-        card.dataset.bio = speaker.bio || '';
-        card.dataset.img = speaker.profilePicture || '';
-        card.dataset.talk = (speaker.sessions && speaker.sessions.length) ? speaker.sessions[0].name : '';
-
-        card.innerHTML = `
-          <div class="speaker-avatar">
-            ${speaker.profilePicture ? `<img src="${speaker.profilePicture}" alt="${speaker.fullName}" loading="lazy">` : '?'}
-          </div>
-          <div class="speaker-name">${speaker.fullName}</div>
-          <div class="speaker-role">${speaker.tagLine || ''}</div>
-          ${speaker.sessions && speaker.sessions.length ? `<div class="speaker-topic">${speaker.sessions[0].name}</div>` : ''}
-        `;
-
-        card.addEventListener('click', () => openSpeakerModal(card));
-        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSpeakerModal(card); }});
-        grid.appendChild(card);
-      });
-
-      // Add one CFP card at the end if CFP is still open
-      const cfp = document.createElement('div');
-      cfp.className = 'speaker-card cfp-card';
-      cfp.tabIndex = 0;
-      cfp.innerHTML = `<div class="cfp-face" aria-hidden="true">🎤</div><div class="cfp-text">See Your Face Here</div><div class="cfp-sub">Submit a talk proposal</div>`;
-      cfp.addEventListener('click', () => window.open('https://sessionize.com/thunderplains-2026/', '_blank'));
-      grid.appendChild(cfp);
-
-    } catch (err) {
-      console.log('Sessionize speakers not loaded:', err.message);
-    }
-  }
-
-  // ---- SCHEDULE ----
-  async function loadSessionizeSchedule() {
-    if (!SESSIONIZE_EVENT_ID) return;
-    try {
-      const res = await fetch(`https://sessionize.com/api/v2/${SESSIONIZE_EVENT_ID}/view/GridSmart`);
-      const data = await res.json();
-      if (!data || !data.length) return;
-
-      const container = document.getElementById('sessionize-schedule');
-      const staticEl = document.getElementById('static-schedule');
-
-      // Build table from Sessionize grid data
-      const day = data[0]; // Single day conference
-      const rooms = day.rooms || [];
-
-      let html = '<div class="schedule-table-wrapper"><table class="schedule-table" role="table"><thead><tr><th class="time-col">Time</th>';
-      rooms.forEach(r => { html += `<th>${r.name}</th>`; });
-      html += '</tr></thead><tbody>';
-
-      // Collect all unique time slots
-      const timeSlots = new Map();
-      rooms.forEach(room => {
-        (room.sessions || []).forEach(session => {
-          const start = new Date(session.startsAt);
-          const key = start.toISOString();
-          if (!timeSlots.has(key)) timeSlots.set(key, {});
-          timeSlots.get(key)[room.name] = session;
-        });
-      });
-
-      // Sort by time
-      const sorted = [...timeSlots.entries()].sort((a, b) => new Date(a[0]) - new Date(b[0]));
-
-      sorted.forEach(([timeKey, roomSessions]) => {
-        const t = new Date(timeKey);
-        const timeStr = t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-
-        // Check if all rooms have the same session (break/keynote)
-        const vals = Object.values(roomSessions);
-        const isShared = vals.length === 1 && vals[0].isServiceSession;
-
-        if (isShared) {
-          html += `<tr><td class="sched-time">${timeStr}</td><td colspan="${rooms.length}" class="sched-break">${vals[0].title}</td></tr>`;
-        } else {
-          html += `<tr><td class="sched-time">${timeStr}</td>`;
-          rooms.forEach(room => {
-            const s = roomSessions[room.name];
-            if (s) {
-              const speakerNames = (s.speakers || []).map(sp => sp.name).join(', ');
-              html += `<td><div class="sched-talk">${s.title}</div>${speakerNames ? `<div class="sched-speaker">${speakerNames}</div>` : ''}</td>`;
-            } else {
-              html += '<td></td>';
-            }
-          });
-          html += '</tr>';
+      els.forEach(function (elmnt) {
+        var file = elmnt.getAttribute('data-sessionize-load-url');
+        if (!file) {
+          if (--remaining === 0) done();
+          return;
         }
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState !== 4) return;
+          if (this.status === 200) {
+            elmnt.innerHTML = this.responseText;
+            elmnt.removeAttribute('data-sessionize-load-url');
+          }
+          if (--remaining === 0) done();
+        };
+        xhttp.open('GET', file, true);
+        xhttp.send();
       });
+    };
 
-      html += '</tbody></table></div>';
-      container.innerHTML = html;
-
-      // Hide the static fallback
-      if (staticEl) staticEl.style.display = 'none';
-
-    } catch (err) {
-      console.log('Sessionize schedule not loaded:', err.message);
+    // If DOMContentLoaded already fired before this override, run now.
+    if (document.readyState !== 'loading') {
+      sessionize.loader();
     }
-  }
-
-  // ---- SPEAKER MODAL ----
-  function openSpeakerModal(card) {
-    const modal = document.getElementById('speaker-modal');
-    document.getElementById('modal-speaker-name').textContent = card.dataset.name;
-    document.getElementById('modal-role').textContent = card.dataset.role;
-    document.getElementById('modal-bio').textContent = card.dataset.bio;
-
-    const avatarEl = document.getElementById('modal-avatar');
-    avatarEl.innerHTML = card.dataset.img ? `<img src="${card.dataset.img}" alt="${card.dataset.name}">` : '';
-
-    const talkSection = document.getElementById('modal-talk');
-    const talkTitle = document.getElementById('modal-talk-title');
-    if (card.dataset.talk) {
-      talkTitle.textContent = card.dataset.talk;
-      talkSection.style.display = 'block';
-    } else {
-      talkSection.style.display = 'none';
-    }
-
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    modal.querySelector('.modal-close').focus();
-  }
-
-  function closeSpeakerModal() {
-    const modal = document.getElementById('speaker-modal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelector('.modal-close').addEventListener('click', closeSpeakerModal);
-  document.getElementById('speaker-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeSpeakerModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSpeakerModal(); });
-
-  // CFP card clicks
-  document.querySelectorAll('.cfp-card').forEach(card => {
-    card.addEventListener('click', () => window.open('https://sessionize.com/thunderplains-2026/', '_blank'));
-    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.open('https://sessionize.com/thunderplains-2026/', '_blank'); }});
-  });
-
-  loadSessionizeSpeakers();
-  loadSessionizeSchedule();
+  })();
 </script>
 </body>
 </html>
