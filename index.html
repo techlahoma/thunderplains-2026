@@ -332,7 +332,11 @@
   .sponsor-tier { margin-bottom: 3rem; }
   .tier-label { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--yellow); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(245,255,48,0.15); }
   .sponsor-logos { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
-  .sponsor-logo { width: 160px; height: 70px; background: var(--charcoal); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--gray); transition: all 0.3s; }
+  .sponsor-logo { background: var(--charcoal); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--gray); transition: all 0.3s; text-decoration: none; }
+  .sponsor-logo img { max-width: 88%; max-height: 70%; width: auto; height: auto; object-fit: contain; display: block; }
+  .sponsor-tier--gold .sponsor-logo { width: 200px; height: 88px; }
+  .sponsor-tier--silver .sponsor-logo { width: 160px; height: 70px; }
+  .sponsor-tier--bronze .sponsor-logo { width: 140px; height: 60px; }
   .sponsor-logo:hover { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0,240,255,0.08); }
   .sponsor-cta { margin-top: 2.5rem; padding: 2.5rem; border: 1px dashed rgba(255,255,255,0.15); text-align: center; }
   .sponsor-cta p { color: var(--gray); font-size: 1.05rem; margin-bottom: 1rem; }
@@ -542,13 +546,21 @@
   <h2 class="section-title">Sponsors</h2>
   <p class="section-desc">The companies that make ThunderPlains possible.</p>
   <div class="sponsor-tiers">
-    <div class="sponsor-tier">
+    <div class="sponsor-tier sponsor-tier--gold">
       <div class="tier-label">Gold</div>
       <div class="sponsor-logos"><div class="sponsor-logo">YOUR LOGO</div><div class="sponsor-logo">YOUR LOGO</div></div>
     </div>
-    <div class="sponsor-tier">
+    <div class="sponsor-tier sponsor-tier--silver">
       <div class="tier-label">Silver</div>
       <div class="sponsor-logos"><div class="sponsor-logo">YOUR LOGO</div><div class="sponsor-logo">YOUR LOGO</div><div class="sponsor-logo">YOUR LOGO</div></div>
+    </div>
+    <div class="sponsor-tier sponsor-tier--bronze">
+      <div class="tier-label">Bronze</div>
+      <div class="sponsor-logos">
+        <a class="sponsor-logo" href="https://www.youversion.com/" target="_blank" rel="noopener noreferrer">
+          <img src="sponsors/youversion.png" alt="YouVersion" width="480" height="108">
+        </a>
+      </div>
     </div>
   </div>
   <div class="sponsor-cta">
