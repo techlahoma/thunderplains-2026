@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 GIT_BRANCH=$(git symbolic-ref -q HEAD)
 GIT_REPO_URL=$(git config --get remote.origin.url)
 BUILD_FOLDER=".build"
@@ -29,6 +30,13 @@ touch .nojekyll
 
 git add .
 git commit -am "Static site deploy"
+
+# actions/checkout stores its token on the parent repo only. This deploy
+# uses a fresh repo in .build, so CI pushes need the token on this remote.
+if [ -n "${GITHUB_TOKEN:-}" ]; then
+  git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+fi
+
 git push origin gh-pages --force
 cd ..
 rm -rf $BUILD_FOLDER
